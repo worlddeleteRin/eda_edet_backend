@@ -2,7 +2,7 @@ from pydantic import BaseSettings
 from functools import lru_cache
 
 class Settings(BaseSettings):
-	app_name: str = "Food delivery"
+	app_name: str = "Some food delivery"
 	JWT_SECRET_KEY: str = None
 	JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 1
 	JWT_SESSION_KEY: str = None

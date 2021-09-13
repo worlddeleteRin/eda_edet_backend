@@ -24,7 +24,7 @@ router = APIRouter(
 )
 
 
-@router.get("/pickup-addresses", 
+@router.get("/pickup-addresses",
 # response_model = List[PickupAddress]
 )
 def pickup_addresses(
@@ -33,7 +33,7 @@ def pickup_addresses(
 	pickup_addresses = get_pickup_addresses(request.app.pickup_addresses_db)
 	return pickup_addresses
 
-@router.post("/pickup-address")
+@router.post("/pickup-addresses")
 def add_pickup_address(
 	request: Request,
 	pickup_address: PickupAddress,

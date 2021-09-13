@@ -70,3 +70,26 @@ def create_order(
 #		if cart:
 #			cart.delete_db()
 	return order.dict()
+
+@router.post("/guest")
+def create_guest_order(
+	request: Request,
+	new_order: BaseOrderCreate,
+	):
+	print('new order is', new_order)
+	order: BaseOrder = new_order_object(request, new_order)
+	print('order time is', order.date_created)
+	# set order to guest order
+	order.is_guest = True
+	# add products line_items to order
+	for line_item in order.line_items:
+		if line_item.product == None:
+			order.add_line_item(request, line_item)
+
+	order.count_amount()
+	# save order to db
+	order.save_db(request.app.orders_db)
+	# delete cart by session_id, if it is exist
+	if new_order.customer_session_id:
+		delete_session_cart(request.app.carts_db, new_order.customer_session_id)
+	return order.dict()

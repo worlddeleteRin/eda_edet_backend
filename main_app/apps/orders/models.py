@@ -99,6 +99,8 @@ class BaseOrderCreate(BaseModel):
 	delivery_method: str = None
 	# user_delivery_address id, if delivery method is 'delivery'
 	delivery_address: UUID4 = None
+	# guest delivery address
+	guest_delivery_address: str = None
 	# pickup_address id, if delivery_method is 'pickup'
 	pickup_address: UUID4 = None
 	# list of coupons objects
@@ -110,6 +112,8 @@ class BaseOrderCreate(BaseModel):
 class BaseOrder(BaseModel):
 	""" Base Order Model """
 	id: UUID4 = Field(default_factory=uuid.uuid4, alias="_id")
+	# is guest order
+	is_guest: bool = False
 	# id of cart, that was converted to order
 	cart_id: UUID4 = None
 	# id of the customer, that makes order, or, that is assigned to the order by admin
@@ -137,6 +141,8 @@ class BaseOrder(BaseModel):
 
 	# user_delivery_address object, if delivery method is 'delivery'
 	delivery_address: UserDeliveryAddress = None
+	# guest delivery address
+	guest_delivery_address: str = None
 	# pickup_address id, if delivery_method is 'pickup'
 	pickup_address: PickupAddress = None
 	# list of coupons objects
