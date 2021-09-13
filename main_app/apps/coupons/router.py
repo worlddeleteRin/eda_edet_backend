@@ -29,7 +29,6 @@ async def create_coupon(
 	coupon: BaseCoupon,
 	):
 
-	print('coupon is', coupon)
 	# need to check, if coupon with that id exists
 	# add coupon to db
 	request.app.coupons_db.insert_one(

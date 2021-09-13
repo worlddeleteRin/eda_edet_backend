@@ -37,9 +37,7 @@ def get_orders_by_user_id(orders_db, user_id: UUID4):
 	user_orders_dict = orders_db.find(
 		{"customer_id": user_id}
 	).sort("date_created", -1)
-	print('user_orders_dict is', user_orders_dict, user_orders_dict.count())
 	if user_orders_dict.count() == 0:
-		print('no orders found')
 		return []
 	user_orders = [BaseOrder(**order).dict() for order in user_orders_dict]
 	return user_orders

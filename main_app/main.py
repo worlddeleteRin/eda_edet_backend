@@ -85,7 +85,7 @@ def get_status():
 	""" Get status of server """
 	return {
 		"status": "running",
-		"settings": settings.dict(),
+		#"settings": settings.dict(),
 		}
 
 @app.get("/session")

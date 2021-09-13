@@ -60,7 +60,6 @@ async def check_exist_verified_user(request: Request,
 	user_info: BaseUserExistVerified,
 	):
 	exist_verified = False
-	print('user info is', user_info)
 	user = request.app.users_db.find_one({"username": user_info.username})
 	if user and user["is_verified"]:
 		exist_verified = True
@@ -229,7 +228,6 @@ async def create_user_delivery_address(
 	current_user: BaseUserDB = Depends(get_current_active_user)
 	):
 	new_address.user_id = current_user.id
-	print('new address is', new_address)
 	request.app.users_addresses_db.insert_one(
 		new_address.dict(by_alias=True)
 	)

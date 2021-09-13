@@ -43,10 +43,7 @@ def create_order(
 	new_order: BaseOrderCreate,
 	current_user: BaseUser = Depends(get_current_active_user)
 	):
-	print('current user is', current_user)
-	print('new order is', new_order)
 	order: BaseOrder = new_order_object(request, new_order)
-	print('order time is', order.date_created)
 	# add products line_items to order
 	for line_item in order.line_items:
 		if line_item.product == None:
@@ -76,9 +73,7 @@ def create_guest_order(
 	request: Request,
 	new_order: BaseOrderCreate,
 	):
-	print('new order is', new_order)
 	order: BaseOrder = new_order_object(request, new_order)
-	print('order time is', order.date_created)
 	# set order to guest order
 	order.is_guest = True
 	# add products line_items to order
