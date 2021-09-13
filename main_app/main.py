@@ -34,11 +34,6 @@ app.add_middleware(
 		max_age=50*1000,
 		same_site="none; Secure=False",
 	)
-origins = [
-	'http://192.168.1.141:8000',
-	'http://192.168.1.141:8080',
-	'http://localhost:8080'
-]
 
 app.add_middleware(
 	CORSMiddleware,
