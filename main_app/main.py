@@ -99,6 +99,7 @@ def create_session():
 
 
 if __name__ == "__main__":
+	print('settings are', settings.dict())
 	uvicorn.run(
 		"main:app",
 		host='0.0.0.0',
