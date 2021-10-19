@@ -19,16 +19,16 @@ class BaseProductCategory(BaseModel):
 
 	def exist_get_db(self, categories_db):
 		# try get category by id, if it is specified
-		if self.slug:
-			category = categories_db.find_one(
-				{"slug": self.slug}
-			)
-			if not category:
-				return False, None
-			return True, BaseProductCategory(**category).dict()
-		return False, None
+#		if self.slug:
+#			category = categories_db.find_one(
+#				{"slug": self.slug}
+#			)
+#			if not category:
+#				return False, None
+#			return True, BaseProductCategory(**category).dict()
+#		return False, None
 		# try find category by slug, if it is specified
-		elif self.slug.__len__() > 0:
+		if self.slug.__len__() > 0:
 			category = categories_db.find_one(
 				{"slug": self.slug}
 			)
