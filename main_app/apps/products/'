@@ -12,21 +12,20 @@ from .product_exceptions import ProductAlreadyExist, ProductNotExist, CategoryAl
 
 class BaseProductCategory(BaseModel):
 	name: str = ""
-	slug: str
+	slug: str = ""
 
 	class Config:
 		allow_population_by_field_name = True
 
 	def exist_get_db(self, categories_db):
 		# try get category by id, if it is specified
-		if self.slug:
+		if self.id:
 			category = categories_db.find_one(
-				{"slug": self.slug}
+				{"_id": self.id}
 			)
 			if not category:
 				return False, None
-			return True, BaseProductCategory(**category).dict()
-		return False, None
+			return True, BaseProductCategory(**category)
 		# try find category by slug, if it is specified
 		elif self.slug.__len__() > 0:
 			category = categories_db.find_one(

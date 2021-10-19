@@ -26,6 +26,7 @@ from database.main_db import setup_mongodb
 
 # include all necessary routes
 app = FastAPI()
+app.settings = settings
 # add app middleware
 app.add_middleware(
 		SessionMiddleware,
