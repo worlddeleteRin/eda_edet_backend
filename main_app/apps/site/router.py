@@ -10,7 +10,7 @@ import uuid
 # import config (env variables)
 from config import settings
 
-from .models import PickupAddress, StockItem
+from .models import PickupAddress, StockItem, MenuLink
 
 from .delivery_pickup import get_pickup_addresses
 from apps.payments.payments import get_payment_methods
@@ -71,3 +71,20 @@ def create_stock(
 ):
 	stock.save_db(request.app.stocks_db)
 	return stock.dict()
+
+@router.get('/common-info')
+def get_common_info(
+	request: Request,
+):
+	menu_links_cursor = request.app.menu_links_db.find({})
+	menu_links = [MenuLink(**menu_link).dict() for menu_link in menu_links_cursor]
+	#print('menu links are', menu_links)
+	location_address = "Здесь будет адрес доставки! : )"
+	delivery_phone = "+79780000001"
+	delivery_phone_display = "7 978 000 00 01"
+	return {
+		"menu_links": menu_links,
+		"location_address": location_address,
+		"delivery_phone": delivery_phone,
+		"delivery_phone_display": delivery_phone_display,
+	}

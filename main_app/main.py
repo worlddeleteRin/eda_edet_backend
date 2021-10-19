@@ -73,6 +73,7 @@ async def startup_db_client():
 	app.pickup_addresses_db = app.mongodb["pickup_addresses"]
 	app.order_statuses_db = app.mongodb["order_statuses"]
 	app.stocks_db = app.mongodb["stocks"]
+	app.menu_links_db = app.mongodb["menu_links"]
 
 @app.on_event('shutdown')
 async def shutdown_db_client():
@@ -104,6 +105,6 @@ if __name__ == "__main__":
 	uvicorn.run(
 		"main:app",
 		host='0.0.0.0',
-		reload=settings.DEBUG_MODE,
+		reload=app.settings.DEBUG_MODE,
 		port=8000,
 	)

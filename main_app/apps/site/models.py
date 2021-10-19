@@ -24,3 +24,8 @@ class StockItem(BaseModel):
 		stocks_db.insert_one(
 			self.dict(by_alias=True)
 		)
+
+class MenuLink(BaseModel):
+	id: UUID4 = Field(default_factory=uuid.uuid4, alias="_id")
+	link_name: str = ""
+	link_path: str = ""
