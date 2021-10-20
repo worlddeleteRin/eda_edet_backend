@@ -25,7 +25,7 @@ router = APIRouter(
 # categories
 @router.get("/categories")
 async def get_categories(request: Request):
-	categories_dict = request.app.mongodb["categories"].find({})
+	categories_dict = request.app.mongodb["categories"].find({}).sort("menu_order", 1)
 	categories = [BaseCategory(**category).dict() for category in categories_dict]
 	return {
 		"status": "success",

@@ -76,7 +76,7 @@ def create_stock(
 def get_common_info(
 	request: Request,
 ):
-	menu_links_cursor = request.app.menu_links_db.find({})
+	menu_links_cursor = request.app.menu_links_db.find({}).sort("display_order", 1)
 	menu_links = [MenuLink(**menu_link).dict() for menu_link in menu_links_cursor]
 	#print('menu links are', menu_links)
 	location_address = "Здесь будет адрес доставки! : )"
