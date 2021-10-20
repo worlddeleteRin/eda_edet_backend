@@ -10,6 +10,8 @@ from config import settings
 from bson.objectid import ObjectId
 from bson import json_util
 import json
+# import static files
+from fastapi.staticfiles import StaticFiles
 
 # routes importing
 from apps.products import router as products_router
@@ -27,6 +29,10 @@ from database.main_db import setup_mongodb
 # include all necessary routes
 app = FastAPI()
 app.settings = settings
+
+# mount static files folder
+app.mount("/static", StaticFiles(directory="static"), name = "static")
+
 # add app middleware
 app.add_middleware(
 		SessionMiddleware,

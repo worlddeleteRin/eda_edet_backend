@@ -6,4 +6,6 @@ secure.py
 **/.env
 test
 .test
+/static
+**/static
 
