@@ -11,6 +11,7 @@ class Settings(BaseSettings):
 	DB_URL: str = None
 	DB_NAME: str = None
 	DEBUG_MODE: bool = True
+	base_static_url: str = ""
 
 	class Config:
 		env_file = ".env"

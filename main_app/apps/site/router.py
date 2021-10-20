@@ -82,7 +82,9 @@ def get_common_info(
 	location_address = "Здесь будет адрес доставки! : )"
 	delivery_phone = "+79780000001"
 	delivery_phone_display = "7 978 000 00 01"
+	main_logo_link = request.app.settings.base_static_url + "main_logo.png"
 	return {
+		"main_logo_link": main_logo_link,
 		"menu_links": menu_links,
 		"location_address": location_address,
 		"delivery_phone": delivery_phone,
