@@ -101,6 +101,8 @@ class BaseOrderCreate(BaseModel):
 	delivery_address: UUID4 = None
 	# guest delivery address
 	guest_delivery_address: str = None
+	# guest phone
+	guest_phone: str = None
 	# pickup_address id, if delivery_method is 'pickup'
 	pickup_address: UUID4 = None
 	# list of coupons objects
@@ -118,6 +120,7 @@ class BaseOrder(BaseModel):
 	cart_id: UUID4 = None
 	# id of the customer, that makes order, or, that is assigned to the order by admin
 	customer_id: UUID4 = None
+	customer_username: str = None
 	customer_ip_address: str = None
 	status: OrderStatus = order_statuses["awaiting_confirmation"]
 #	status: OrderStatusEnum = OrderStatusEnum.awaiting_confirmation
@@ -143,6 +146,8 @@ class BaseOrder(BaseModel):
 	delivery_address: UserDeliveryAddress = None
 	# guest delivery address
 	guest_delivery_address: str = None
+	# guest phone
+	guest_phone: str = None
 	# pickup_address id, if delivery_method is 'pickup'
 	pickup_address: PickupAddress = None
 	# list of coupons objects

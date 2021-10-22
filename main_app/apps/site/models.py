@@ -30,3 +30,9 @@ class MenuLink(BaseModel):
 	link_name: str = ""
 	link_path: str = ""
 	display_order: int = 0
+
+class MainSliderItem(BaseModel):
+	id: UUID4 = Field(default_factory=uuid.uuid4, alias="_id")
+	imgsrc: List[str] = []
+	link_path: str = ""
+	display_order: int = 0

@@ -10,7 +10,7 @@ import uuid
 # import config (env variables)
 from config import settings
 
-from .models import PickupAddress, StockItem, MenuLink
+from .models import PickupAddress, StockItem, MenuLink, MainSliderItem
 
 from .delivery_pickup import get_pickup_addresses
 from apps.payments.payments import get_payment_methods
@@ -79,9 +79,9 @@ def get_common_info(
 	menu_links_cursor = request.app.menu_links_db.find({}).sort("display_order", 1)
 	menu_links = [MenuLink(**menu_link).dict() for menu_link in menu_links_cursor]
 	#print('menu links are', menu_links)
-	location_address = "Здесь будет адрес доставки! : )"
-	delivery_phone = "+79780000001"
-	delivery_phone_display = "7 978 000 00 01"
+	location_address = "г. Ялта пгт Береговое ( Кастрополь) ул. Кипарисная 1 корпус 15"
+	delivery_phone = "+79781740707"
+	delivery_phone_display = "7 978 174 07 07"
 	main_logo_link = request.app.settings.base_static_url + "main_logo.png"
 	return {
 		"main_logo_link": main_logo_link,
@@ -90,3 +90,11 @@ def get_common_info(
 		"delivery_phone": delivery_phone,
 		"delivery_phone_display": delivery_phone_display,
 	}
+
+@router.get('/main-sliders')
+def get_common_info(
+	request: Request,
+):
+	main_sliders_dict = request.app.main_sliders.find({}).sort("display_order", 1)
+	main_sliders = [MainSliderItem(**main_slider).dict() for main_slider in main_sliders_dict]
+	return main_sliders 

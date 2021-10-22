@@ -12,6 +12,9 @@ class Settings(BaseSettings):
 	DB_NAME: str = None
 	DEBUG_MODE: bool = True
 	base_static_url: str = ""
+	telegram_notif_group_id: str = None
+	telegram_bot_username: str = None
+	telegram_bot_token: str = None
 
 	class Config:
 		env_file = ".env"

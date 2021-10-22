@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request, Body
+from fastapi import APIRouter, BackgroundTasks, Depends, Request, Body
 from typing import Optional, List
 
 from datetime import datetime, timedelta
@@ -18,6 +18,9 @@ from .models import BaseOrder, BaseOrderCreate
 from .orders import get_order_by_id, new_order_object
 
 from apps.cart.cart import delete_session_cart
+
+# import send order notification
+from apps.notifications.new_order import send_order_admin_notification
 
 
 
@@ -41,6 +44,7 @@ def get_order(
 def create_order(
 	request: Request,
 	new_order: BaseOrderCreate,
+	background_task: BackgroundTasks,
 	current_user: BaseUser = Depends(get_current_active_user)
 	):
 	order: BaseOrder = new_order_object(request, new_order)
@@ -66,12 +70,15 @@ def create_order(
 #		cart = get_cart_by_id(request, order.cart_id, silent=True)
 #		if cart:
 #			cart.delete_db()
+	background_task.add_task(send_order_admin_notification, order)
+
 	return order.dict()
 
 @router.post("/guest")
 def create_guest_order(
 	request: Request,
 	new_order: BaseOrderCreate,
+	background_task: BackgroundTasks,
 	):
 	order: BaseOrder = new_order_object(request, new_order)
 	# set order to guest order
@@ -87,4 +94,6 @@ def create_guest_order(
 	# delete cart by session_id, if it is exist
 	if new_order.customer_session_id:
 		delete_session_cart(request.app.carts_db, new_order.customer_session_id)
+	# send new order notification
+	background_task.add_task(send_order_admin_notification, order)
 	return order.dict()

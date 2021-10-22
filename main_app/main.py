@@ -80,6 +80,7 @@ async def startup_db_client():
 	app.order_statuses_db = app.mongodb["order_statuses"]
 	app.stocks_db = app.mongodb["stocks"]
 	app.menu_links_db = app.mongodb["menu_links"]
+	app.main_sliders = app.mongodb["main_sliders"]
 
 @app.on_event('shutdown')
 async def shutdown_db_client():
