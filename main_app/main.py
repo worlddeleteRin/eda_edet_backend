@@ -28,7 +28,7 @@ from database.main_db import setup_mongodb
 
 # include all necessary routes
 app = FastAPI()
-app.settings = get_settings(env_file = ".development.env")
+app.settings = get_settings(env_file = ".production.env")
 
 # mount static files folder
 app.mount("/static", StaticFiles(directory="static"), name = "static")
