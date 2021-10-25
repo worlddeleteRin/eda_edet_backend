@@ -2,8 +2,9 @@ from fastapi import Depends, Request
 from .models import PaymentMethod
 from .payment_exceptions import PaymentMethodNotExist
 import uuid
-from config import settings
+from config import get_settings
 
+settings = get_settings()
 
 def get_payment_methods(payments_db):
 	payment_methods_dict = payments_db.find({})

@@ -8,7 +8,7 @@ from pymongo import ReturnDocument
 import uuid
 
 # import config (env variables)
-from config import settings
+from config import get_settings
 
 from .models import PickupAddress, StockItem, MenuLink, MainSliderItem
 
@@ -23,6 +23,7 @@ router = APIRouter(
 	tags = ["site"],
 )
 
+settings = get_settings()
 
 @router.get("/pickup-addresses",
 # response_model = List[PickupAddress]

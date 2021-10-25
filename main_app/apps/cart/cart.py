@@ -2,11 +2,13 @@ from fastapi import Depends, Request
 from .models import BaseCart, LineItem, SessionId
 from .cart_exceptions import CartAlreadyExist, CartNotExist, NotValidUUID
 import uuid
-from config import settings
+from config import get_settings
 
 from .jwt_session import create_session_token, decode_token
 
 from pydantic import UUID4
+
+settings = get_settings()
 
 
 def create_session_id():

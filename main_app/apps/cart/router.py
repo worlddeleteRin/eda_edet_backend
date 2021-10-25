@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from pymongo import ReturnDocument
 
 # import config (env variables)
-from config import settings
+from config import get_settings
 
 from .models import BaseCart, LineItem, LineItemUpdate, SessionId
 from .cart_exceptions import CartAlreadyExist, CartNotExist, NotValidUUID
@@ -20,6 +20,8 @@ from .cart import  get_current_cart_active_by_id, get_cart_by_session_id
 
 
 import uuid
+
+settings = get_settings()
 
 
 # order exceptions

@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from pymongo import ReturnDocument
 
 # import config (env variables)
-from config import settings
+# from config import settings
 
 from .models import BaseUser, BaseUserDB, BaseUserCreate, BaseUserVerify, BaseUserUpdate, BaseUserUpdatePassword, Token, TokenData, BaseUserExistVerified, BaseUserRestore, BaseUserRestoreVerify, UserDeliveryAddress, UserDeleteDeliveryAddress
 # models 
@@ -29,6 +29,8 @@ from .verification import send_verification_sms_code
 
 from apps.orders.orders import get_orders_by_user_id
 
+from config import get_settings
+
 
 # https://fastapi.tiangolo.com/tutorial/bigger-applications/
 
@@ -37,6 +39,8 @@ router = APIRouter(
 	tags = ["users"],
 	# responses ? 
 )
+
+settings = get_settings()
 
 
 @router.post("/token", response_model=Token)

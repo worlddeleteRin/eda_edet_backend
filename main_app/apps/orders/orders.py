@@ -2,7 +2,7 @@ from fastapi import Depends, Request
 from .models import BaseOrder, BaseOrderCreate
 from .order_exceptions import OrderNotExist
 import uuid
-from config import settings
+from config import get_settings
 from pydantic import UUID4
 import pymongo
 
@@ -12,6 +12,8 @@ from apps.delivery.delivery import get_delivery_method_by_id
 from apps.site.delivery_pickup import get_pickup_address_by_id
 from apps.users.user import get_user_delivery_address_by_id
 
+
+settings = get_settings()
 
 def get_order_by_id(orders_db, order_id: uuid.UUID, link_products = True):
 	order = orders_db.find_one(

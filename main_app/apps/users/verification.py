@@ -1,5 +1,7 @@
-from config import settings
+from config import get_settings
 import random
+
+settings = get_settings()
 
 def send_verification_sms_code(phone):
 	# generate verification code

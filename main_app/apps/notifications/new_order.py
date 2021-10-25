@@ -1,9 +1,12 @@
 import time
-from config import settings
+from config import get_settings
 from pydantic import BaseModel
 import httpx
 ###
 from apps.orders.models import BaseOrder
+
+
+settings = get_settings()
 
 class TelegramBot(BaseModel):
 	api_url: str = "https://api.telegram.org/bot"

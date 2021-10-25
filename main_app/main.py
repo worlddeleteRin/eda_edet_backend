@@ -4,7 +4,7 @@ from fastapi import FastAPI, status, Request, Depends
 from starlette.middleware.cors import CORSMiddleware
 
 # app config (env variables)
-from config import settings
+from config import get_settings
 
 # import motor.motor_asyncio
 from bson.objectid import ObjectId
@@ -28,7 +28,7 @@ from database.main_db import setup_mongodb
 
 # include all necessary routes
 app = FastAPI()
-app.settings = settings
+app.settings = get_settings(env_file = ".development.env")
 
 # mount static files folder
 app.mount("/static", StaticFiles(directory="static"), name = "static")
@@ -108,7 +108,7 @@ def create_session():
 
 
 if __name__ == "__main__":
-	print('settings are', settings.dict())
+	print('settings are', app.settings)
 	uvicorn.run(
 		"main:app",
 		host='0.0.0.0',

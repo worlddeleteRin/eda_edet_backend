@@ -2,7 +2,9 @@ from fastapi import Depends, Request
 from .models import DeliveryMethod
 from .delivery_exceptions import DeliveryMethodNotExist
 import uuid
-from config import settings
+from config import get_settings
+
+settings = get_settings()
 
 
 def get_delivery_methods(delivery_db):

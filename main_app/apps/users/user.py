@@ -1,6 +1,5 @@
 from fastapi import Depends, Request
 from .models import BaseUser, BaseUserDB, Token, TokenData, BaseUserCreate, BaseUserVerify, BaseUserRestore, BaseUserRestoreVerify, UserDeliveryAddress
-from config import settings
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 
@@ -9,10 +8,11 @@ from .jwt import decode_token, create_access_token
 from .password import verify_password, get_password_hash
 
 from .user_exceptions import InvalidAuthenticationCredentials, IncorrectVerificationCode, InactiveUser, UserAlreadyExist, UserNotExist, UserDeliveryAddressNotExist, UserNotAdmin
-
+from config import get_settings
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+settings = get_settings()
 
 
 

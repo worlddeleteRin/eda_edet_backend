@@ -8,7 +8,7 @@ from pymongo import ReturnDocument
 import uuid
 
 # import config (env variables)
-from config import settings
+# from config import settings
 
 # helper methods from user app 
 from apps.users.user import get_current_active_user
@@ -22,6 +22,8 @@ from apps.cart.cart import delete_session_cart
 # import send order notification
 from apps.notifications.new_order import send_order_admin_notification
 
+from config import get_settings
+
 
 
 # order exceptions
@@ -32,6 +34,7 @@ router = APIRouter(
 	# responses ? 
 )
 
+settings = get_settings()
 
 @router.get("/{order_id}")
 def get_order(

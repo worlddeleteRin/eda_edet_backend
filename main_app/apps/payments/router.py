@@ -8,7 +8,7 @@ from pymongo import ReturnDocument
 import uuid
 
 # import config (env variables)
-from config import settings
+# from config import settings
 
 
 # order exceptions
