@@ -6,6 +6,7 @@ from typing import Optional, List
 
 from pydantic import UUID4, BaseModel, Field, validator
 from datetime import datetime, date
+import pytz
 
 from apps.products.models import BaseProduct
 from apps.products.products import get_product_by_id
@@ -21,6 +22,10 @@ from apps.payments.models import PaymentMethod
 from apps.delivery.models import DeliveryMethod
 from apps.site.models import PickupAddress
 
+def get_time_now():
+	tz = pytz.timezone("Europe/Moscow")
+	time = datetime.now(tz)
+	return time
 
 class OrderStatus(BaseModel):
 	id: str
@@ -125,8 +130,8 @@ class BaseOrder(BaseModel):
 	status: OrderStatus = order_statuses["awaiting_confirmation"]
 #	status: OrderStatusEnum = OrderStatusEnum.awaiting_confirmation
 
-	date_created: Optional[datetime] = Field(default_factory=datetime.utcnow)
-	date_modified: Optional[datetime] = Field(default_factory=datetime.utcnow)
+	date_created: Optional[str] = Field(default_factory=get_time_now)
+	date_modified: Optional[str] = Field(default_factory=get_time_now)
 	line_items: List[LineItem]
 	# amount values
 	# cost of orders content before apply discounts

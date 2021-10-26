@@ -17,7 +17,7 @@ settings = get_settings()
 
 def get_order_by_id(orders_db, order_id: uuid.UUID, link_products = True):
 	order = orders_db.find_one(
-		{"_id": order_id}
+		{"_id": order_id},
 	)
 	if not order:
 		raise OrderNotExist

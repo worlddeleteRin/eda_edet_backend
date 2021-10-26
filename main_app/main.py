@@ -9,7 +9,9 @@ from config import settings
 # import motor.motor_asyncio
 from bson.objectid import ObjectId
 from bson import json_util
+from bson.codec_options import CodecOptions
 import json
+import pytz
 # import static files
 from fastapi.staticfiles import StaticFiles
 
@@ -73,7 +75,12 @@ async def startup_db_client():
 	app.categories_db = app.mongodb["categories"]
 	app.carts_db = app.mongodb["carts"]
 	app.coupons_db = app.mongodb["coupons"]
-	app.orders_db = app.mongodb["orders"]
+	app.orders_db = app.mongodb["orders"].with_options(
+		CodecOptions(
+			tz_aware = True,
+			tzinfo = pytz.timezone("Europe/Moscow")
+		)
+	)
 	app.payment_methods_db = app.mongodb["payment_methods"]
 	app.delivery_methods_db = app.mongodb["delivery_methods"]
 	app.pickup_addresses_db = app.mongodb["pickup_addresses"]
@@ -81,6 +88,8 @@ async def startup_db_client():
 	app.stocks_db = app.mongodb["stocks"]
 	app.menu_links_db = app.mongodb["menu_links"]
 	app.main_sliders = app.mongodb["main_sliders"]
+
+
 
 @app.on_event('shutdown')
 async def shutdown_db_client():
