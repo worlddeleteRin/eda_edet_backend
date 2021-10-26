@@ -23,4 +23,4 @@ class Settings(BaseSettings):
 def get_settings(env_file: str = '.env'):
 	return Settings(_env_file = env_file)
 
-# settings = get_settings()
+settings = get_settings()

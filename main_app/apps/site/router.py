@@ -10,7 +10,7 @@ import uuid
 # import config (env variables)
 from config import get_settings
 
-from .models import PickupAddress, StockItem, MenuLink, MainSliderItem
+from .models import PickupAddress, StockItem, MenuLink, MainSliderItem, RequestCall
 
 from .delivery_pickup import get_pickup_addresses
 from apps.payments.payments import get_payment_methods
@@ -99,3 +99,13 @@ def get_common_info(
 	main_sliders_dict = request.app.main_sliders.find({}).sort("display_order", 1)
 	main_sliders = [MainSliderItem(**main_slider).dict() for main_slider in main_sliders_dict]
 	return main_sliders 
+
+@router.post('/request-call')
+def get_common_info(
+	request: Request,
+	call_info: RequestCall,
+):
+	print('request call info is', call_info)
+	return {
+		"success": True
+	}
