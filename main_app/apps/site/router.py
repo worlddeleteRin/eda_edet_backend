@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request, Body
+from fastapi import APIRouter, Depends, Request, Body, BackgroundTasks
 from typing import Optional, List
 
 from datetime import datetime, timedelta
@@ -15,6 +15,9 @@ from .models import PickupAddress, StockItem, MenuLink, MainSliderItem, RequestC
 from .delivery_pickup import get_pickup_addresses
 from apps.payments.payments import get_payment_methods
 from apps.delivery.delivery import get_delivery_methods
+
+# request call
+from apps.notifications.request_call import send_request_call
 
 # order exceptions
 
@@ -103,9 +106,10 @@ def get_common_info(
 @router.post('/request-call')
 def get_common_info(
 	request: Request,
-	call_info: RequestCall,
+	request_call_info: RequestCall,
+	background_task: BackgroundTasks,
 ):
-	print('request call info is', call_info)
+	background_task.add_task(send_request_call, request_call_info)
 	return {
 		"success": True
 	}
