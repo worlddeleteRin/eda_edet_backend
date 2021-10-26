@@ -4,7 +4,7 @@ from fastapi import FastAPI, status, Request, Depends
 from starlette.middleware.cors import CORSMiddleware
 
 # app config (env variables)
-from config import get_settings
+from config import settings
 
 # import motor.motor_asyncio
 from bson.objectid import ObjectId
@@ -28,7 +28,7 @@ from database.main_db import setup_mongodb
 
 # include all necessary routes
 app = FastAPI()
-app.settings = get_settings(env_file = ".production.env")
+app.settings = settings
 
 # mount static files folder
 app.mount("/static", StaticFiles(directory="static"), name = "static")
